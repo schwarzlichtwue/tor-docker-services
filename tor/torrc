@@ -1,0 +1,26 @@
+## This is not the original torrc file you would find in /etc/tor/torrc.
+## Instead, this file contains everything needed to run the hidden services
+## present in the docker network.
+## It's best to integrate the content of this file into a normal torrc file.
+
+Log notice syslog
+DataDirectory /var/lib/tor
+
+## The HiddenServiceDir contains a file called hostname, which gives you the
+## onion address of your service.
+## By putting multiple HiddenServicePort entries under one HiddenServiceDir,
+## those ports become available under the same address.
+
+## murmur
+HiddenServiceDir /var/lib/tor/murmur/
+HiddenServicePort 64738 murmur:64738
+
+### nextcloud
+HiddenServiceDir /var/lib/tor/nextcloud/
+HiddenServicePort 80 nextcloud:80
+
+## etherpad
+HiddenServiceDir /var/lib/tor/etherpad/
+HiddenServicePort 80 etherpad:9001
+
+IPv6Exit 1

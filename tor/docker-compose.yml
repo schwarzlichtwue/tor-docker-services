@@ -1,0 +1,16 @@
+version: '3.2'
+
+services:
+  tor:
+    image: torservices/tor
+    volumes:
+      - "./torrc:/etc/tor/torrc"
+      - "../volumes/tor/murmur:/var/lib/tor/murmur"
+      - "../volumes/tor/nextcloud:/var/lib/tor/nextcloud"
+      - "../volumes/tor/etherpad:/var/lib/tor/etherpad"
+    networks:
+      - tor
+
+networks:
+  tor:
+    external: true

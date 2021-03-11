@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - "../volumes/etherpad:/var/lib/postgresql/data"
+    env_file:
+      - db.env
+    environment:
+      - PUID=1000
+      - PGID=1000
+    networks:
+      - default
+  etherpad:
+    image: etherpad/etherpad
+    env_file:
+      - db.env
+    depends_on:
+      - db
+    networks:
+      - tor
+      - default
+
+networks:
+  default:
+  tor:
+    external: true

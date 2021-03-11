@@ -1,0 +1,14 @@
+version: '3.2'
+
+services:
+  murmur:
+    image: torservices/murmur
+    volumes:
+      - "./murmur.ini:/etc/murmur-docker.ini"
+      - "../volumes/murmur:/opt/murmur/data"
+    networks:
+      - tor
+
+networks:
+  tor:
+    external: true
